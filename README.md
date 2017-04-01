@@ -53,7 +53,7 @@ An example of playbook for the kepler:
 ```
 ---
 - hosts: localhost
-  remote_user: root
+  become: true
   roles:
     - indigo-dc.kepler
 ```
