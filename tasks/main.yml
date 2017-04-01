@@ -59,7 +59,7 @@
 # User
 #
 - name: add new user {{ user }}
-  user: name={{ user }} password={{ lookup("password", "/tmp/ansible-{{ user }}-password encrypt=sha256_crypt") }} shell=/bin/bash groups=adm,sudo system=yes
+  user: name={{ user }} password={{ password_crypt }} shell=/bin/bash groups=adm,sudo
 
 - name: create required directories
   file: path={{ item }} state=directory owner={{ user }} group={{ user }} mode="u=rwx"
@@ -73,10 +73,6 @@
       - { src: "dotconfig_openbox_autostart", dest: "/home/{{ user }}/.config/openbox/autostart", mode: "u=rw" }
       - { src: "dotconfig_openbox_menu.xml", dest: "/home/{{ user }}/.config/openbox/menu.xml", mode: "u=rw" }
       - { src: "dotvnc_xstartup", dest: "/home/{{ user }}/.vnc/xstartup", mode: "u=rwx" }
-
-# random password generation, currently disabled due to external limitations
-# - name: create password file for vnc
-#   shell: echo {{ lookup("password", "/tmp/ansible-vnc-password") }} | vncpasswd -f > /home/{{ user }}/.vnc/passwd
 
 - name: copy ophidia contents
   command: /bin/cp -r /usr/local/indigokepler/workflows/ophidia /home/{{ user }}/
