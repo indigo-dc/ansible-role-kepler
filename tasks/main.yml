@@ -71,8 +71,10 @@
   copy: src={{ item.src }} dest={{ item.dest }} owner={{ user }} group={{ user }} mode={{ item.mode }}
   with_items:
       - { src: "dotconfig_openbox_autostart", dest: "/home/{{ user }}/.config/openbox/autostart", mode: "u=rw" }
-      - { src: "dotconfig_openbox_menu.xml", dest: "/home/{{ user }}/.config/openbox/menu.xml", mode: "u=rw" }
       - { src: "dotvnc_xstartup", dest: "/home/{{ user }}/.vnc/xstartup", mode: "u=rwx" }
+
+- name: prepare kepler launcher in menu
+  template: src=dotconfig_openbox_menu.xml.j2 dest=/home/{{ user }}/.config/openbox/menu.xml mode="u=rw"
 
 - name: copy ophidia contents
   command: /bin/cp -r /usr/local/indigokepler/workflows/ophidia /home/{{ user }}/
