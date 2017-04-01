@@ -5,8 +5,12 @@ LABEL description="Container image to run Kepler WF engine"
 RUN ansible-galaxy install indigo-dc.kepler && \
     ansible-playbook /etc/ansible/roles/indigo-dc.kepler/tests/kepler.yml
 
-EXPOSE 22 5900
+EXPOSE 5900
 USER indigo
+ENV FUTUREGATEWAY_URI 'set_this_when_running_docker'
+ENV AUTHORIZATION_TOKEN 'set_this_when_running_docker'
+ENV CONFIG_JSON '[{"host":"","port":"","login":"","password":"","argument":""}]'
 CMD /etc/init.d/vmcontext start && \
     /bin/rm --force /tmp/.X0-lock /tmp/.X11-unix/X0 && \
+    echo $CONFIG_JSON > /home/indigo/ophidia/ensemble-visualization/phase1/config.json && \
     /usr/bin/vncserver -fg :0

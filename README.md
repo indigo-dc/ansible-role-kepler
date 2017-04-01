@@ -28,17 +28,8 @@ Role Variables
 The variables that can be passed to this role and a brief description
 about them are as follows.
 
-* tigervnc_url: tivervnc deb url
-* kepler_url: kepler tarball url
-* kepler_home: kepler home
-* javadir: java version
-* java_home: java home
-* user: user
-* password: user passwd
-* oph_cred: ophidia credentials
-* launchpadid: LauchpadID of user
-* fguser: Future Gateway user
-* fghost: Future Gateway host
+* indigo_kepler_version: a version of indigo-dc/indigokepler module to be used
+* password_vnc: password to connect to VNC
 
 Dependencies
 ------------
