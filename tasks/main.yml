@@ -2,9 +2,6 @@
 #
 # Packages
 #
-- name: add repository ppa:openjdk-r/ppa
-  apt_repository: repo=ppa:openjdk-r/ppa update_cache=yes state=present
-
 - name: install required packages
   apt: name={{ item }} state=latest update_cache=yes cache_valid_time=3600
   with_items:
@@ -13,17 +10,10 @@
     - openbox
     - openjdk-8-jdk
     - tint2
-    - x11-xkb-utils
-    - libgnutls28
-    - libtasn1-3-bin
-    - libxfont1
-    - libglu1-mesa
+    - tightvncserver
 
 - name: update java alternatives
   command: update-java-alternatives -s {{ java_version }}
-
-- name: install tigervnc
-  apt: deb={{ tigervnc_url }}
 
 - name: clean package cache
   file: path=/var/lib/apt/lists/ state=absent
