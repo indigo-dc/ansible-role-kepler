@@ -1,4 +1,5 @@
 ---
+tigervnc_url: "https://dl.bintray.com/tigervnc/stable/ubuntu-16.04LTS/amd64/tigervncserver_1.8.0-1ubuntu1_amd64.deb"
 kepler_url: "https://code.kepler-project.org/code/kepler/releases/installers/2.5/Kepler-2.5-linux.tar.gz"
 kepler_home: "/usr/local/Kepler-2.5"
 java_version: "java-1.8.0-openjdk-amd64"

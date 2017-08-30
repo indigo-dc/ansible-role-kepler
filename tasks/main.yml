@@ -10,10 +10,13 @@
     - openbox
     - openjdk-8-jdk
     - tint2
-    - tightvncserver
+    - x11-utils
 
 - name: update java alternatives
   command: update-java-alternatives -s {{ java_version }}
+
+- name: install tigervnc
+  apt: deb={{ tigervnc_url }}
 
 - name: clean package cache
   file: path=/var/lib/apt/lists/ state=absent
@@ -80,9 +83,3 @@
 
 - name: set valid mode for password file for vnc
   file: owner={{ user }} group={{ user }} mode="u=rw,g=,o=" path=/home/{{ user }}/.vnc/passwd
-
-- name: configure vnc service
-  lineinfile: dest=/etc/default/vncservers create=yes line="VNCSERVERS=0:{{ user }}"
-
-- name: start and enable vnc service
-  service: name=vncserver state=started enabled=yes
